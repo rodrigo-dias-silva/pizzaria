@@ -1,9 +1,8 @@
-import {Router, Request, Response} from 'express'
+import {Router} from 'express'
+import { CreateUserController } from './controllers/user/CreateUserController'
 
-const router = Router()
+const routers = Router()
 
-router.get('/teste',(req: Request,res:Response)=>{
-  throw new Error('Erro ao fazer essa requisição')
-})
+routers.post('/users', new CreateUserController().handle)
 
-export {router}
+export {routers}
