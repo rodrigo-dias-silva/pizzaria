@@ -18,7 +18,12 @@ export function isAuthenticated(req: Request , res: Response, next: NextFunction
   
   try {
     const {sub}= verify(token,process.env.JWT_SECRET) as Payload
+
+    // Recuperar id do token e colocar a variavel user_id no req
+    req.user_id = sub
+
     return next()
+
   } catch (error) {
     return res.status(401).end()
   }
