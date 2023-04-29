@@ -12,6 +12,7 @@ import { isAuthenticated } from "./middlewares/isAuthenticated";
 
 import uploadConfig from "./config/multer";
 import { ListByCategoryController } from "./controllers/product/ListByCategoryController";
+import { CreateOrderController } from "./controllers/order/CreateOrderController";
 
 const routers = Router();
 
@@ -50,5 +51,8 @@ routers.get(
   isAuthenticated,
   new ListByCategoryController().handle
 );
+
+// Rotas order
+routers.post("/order", isAuthenticated, new CreateOrderController().handle);
 
 export { routers };
