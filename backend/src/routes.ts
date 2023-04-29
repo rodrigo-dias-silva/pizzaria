@@ -11,6 +11,7 @@ import { CreateProductController } from "./controllers/product/CreateProductCont
 import { isAuthenticated } from "./middlewares/isAuthenticated";
 
 import uploadConfig from "./config/multer";
+import { ListByCategoryController } from "./controllers/product/ListByCategoryController";
 
 const routers = Router();
 
@@ -42,6 +43,12 @@ routers.post(
   isAuthenticated,
   upload.single("file"),
   new CreateProductController().handle
+);
+
+routers.get(
+  "/category/product",
+  isAuthenticated,
+  new ListByCategoryController().handle
 );
 
 export { routers };
