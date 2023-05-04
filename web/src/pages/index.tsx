@@ -3,6 +3,7 @@ import logoImg from '../../public/logo.svg'
 import Image from 'next/image'
 import { Input } from '../components/ui/Input'
 import { Button } from '../components/ui/Button'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -31,7 +32,7 @@ export default function Home() {
             </Button>
           </form>
 
-          <a className='mt-4 text-white' href='#'>Nao possui uma conta?</a>
+          <Link href='/signup' className='mt-4 text-white'>Nao possui uma conta?</Link>
         </div>
       </div>
     </>
