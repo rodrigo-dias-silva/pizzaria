@@ -9,7 +9,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 export function Button({ loading, children, ...rest }: Props) {
   return (
     <button
-      className="max-w-xl bg-red-theme p-2 text-white rounded-lg transition-all hover:brightness-125 disabled:cursor-not-allowed"
+      className="max-w-xl h-10 bg-red-theme p-2 text-white rounded-lg transition-all hover:brightness-125 disabled:cursor-not-allowed"
       disabled={loading}
       {...rest}
     >
