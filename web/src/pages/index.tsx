@@ -10,11 +10,11 @@ export default function Home() {
       <Head>
         <title>DG Pizza | Faça o login</title>
       </Head>
-      <div>
+      <div className='min-h-screen flex flex-col justify-center items-center'>
         <Image src={logoImg} alt='Logo DG Pizza' />
 
-        <div>
-          <form>
+        <div className='mt-8 w-full max-w-xl flex flex-col items-center justify-center p-4'>
+          <form className='w-11/12 flex flex-col'>
             <Input
               type='text'
               placeholder='Digite seu email'
@@ -30,6 +30,8 @@ export default function Home() {
               Acessar
             </Button>
           </form>
+
+          <a className='mt-4 text-white' href='#'>Nao possui uma conta?</a>
         </div>
       </div>
     </>
