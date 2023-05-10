@@ -1,11 +1,31 @@
-import Head from 'next/head'
-import logoImg from '../../../public/logo.svg'
+import { FormEvent, useState } from 'react'
 import Image from 'next/image'
-import { Input } from '../../components/ui/Input'
-import { Button } from '../../components/ui/Button'
+import Head from 'next/head'
 import Link from 'next/link'
 
+import logoImg from '../../../public/logo.svg'
+import { Input } from '../../components/ui/Input'
+import { Button } from '../../components/ui/Button'
+
 export default function SignUp() {
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const [loadind, setLoadind] = useState(false)
+
+  async function handleSignUp(e: FormEvent) {
+    e.preventDefault()
+
+    if (name === '' || email === '' || password === '') {
+      alert('Preencha todos os campos')
+      return
+    }
+
+    setLoadind(true)
+  }
+
   return (
     <>
       <Head>
@@ -15,22 +35,31 @@ export default function SignUp() {
         <Image src={logoImg} alt='Logo DG Pizza' />
 
         <div className='mt-8 w-full max-w-xl flex flex-col items-center justify-center p-4'>
-          <form className='w-11/12 flex flex-col'>
+          <form
+            className='w-11/12 flex flex-col'
+            onSubmit={handleSignUp}
+          >
             <Input
               type='text'
               placeholder='Nome da empresa'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <Input
               type='text'
               placeholder='Digite um email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <Input
               type='password'
               placeholder='Digite uma senha'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Button
               type='submit'
-              loading={false}
+              loading={loadind}
             >
               Cadastrar
             </Button>
