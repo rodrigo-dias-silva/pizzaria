@@ -1,11 +1,21 @@
+import Header from '@/src/components/Header'
 import { canSSRAuth } from '@/src/utils/canSSRAuth'
+import Head from 'next/head'
 import React from 'react'
 
 type Props = {}
 
 export default function Dashboard({ }: Props) {
   return (
-    <div>Dashboard</div>
+    <>
+      <Head>
+        <title>DG Pizza | Painel</title>
+      </Head>
+      <div>
+        <Header />
+        <h1>Painel</h1>
+      </div>
+    </>
   )
 }
 
