@@ -8,7 +8,7 @@ export function Input({ ...rest }: Props) {
   return (
     <input
       type="text"
-      className="mb-4 h-10 rounded-lg bg-dark-900 text-white p-4 border border-gray-500 placeholder:opacity-50"
+      className="mb-4 h-10 rounded-lg bg-dark-900 text-white px-4 border border-gray-500 placeholder:opacity-50"
       {...rest}
     />
   )
@@ -17,7 +17,7 @@ export function Input({ ...rest }: Props) {
 export function TextArea({ ...rest }: TextAreaProps) {
   return (
     <textarea
-      className="mb-4 h-10 rounded-lg bg-dark-900 text-white p-4 border border-gray-500 placeholder:opacity-50"
+      className="mb-4 h-24 rounded-lg bg-dark-900 text-white px-4 py-2 border border-gray-500 placeholder:opacity-50 resize-none"
       {...rest}
     />
   )
