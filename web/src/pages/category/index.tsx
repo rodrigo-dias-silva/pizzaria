@@ -4,6 +4,8 @@ import Head from "next/head"
 import Header from "@/src/components/Header"
 import { Button } from "@/src/components/ui/Button"
 import { Input } from "@/src/components/ui/Input"
+import { setupAPIClient } from "@/src/services/api"
+import { toast } from "react-toastify"
 
 type Props = {}
 
@@ -13,6 +15,20 @@ export default function Category({ }: Props) {
 
   async function handleRegister(e: FormEvent) {
     e.preventDefault()
+
+    if (name === '') {
+      return
+    }
+
+    const apiClient = setupAPIClient()
+
+    await apiClient.post('/category', {
+      name: name
+    })
+
+    toast.success('Categoria cadastrada com sucesso!')
+
+    setName('')
   }
 
   return (
