@@ -73,6 +73,8 @@ export default function SignUp() {
             <Button
               type='submit'
               loading={loadind}
+              bgcolor='red'
+              txtcolor='white'
             >
               Cadastrar
             </Button>

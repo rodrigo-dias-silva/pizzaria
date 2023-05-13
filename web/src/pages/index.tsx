@@ -61,6 +61,8 @@ export default function Home() {
             <Button
               type='submit'
               loading={loading}
+              bgcolor='red'
+              txtcolor='white'
             >
               Acessar
             </Button>
