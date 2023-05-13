@@ -42,7 +42,7 @@ export default function SignUp() {
   return (
     <>
       <Head>
-        <title>DG Pizza | Faça o seu cadastro</title>
+        <title>Faça o seu cadastro | DG Pizza</title>
       </Head>
       <div className='min-h-screen flex flex-col justify-center items-center'>
         <Image src={logoImg} alt='Logo DG Pizza' />

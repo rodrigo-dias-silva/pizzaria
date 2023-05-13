@@ -9,7 +9,7 @@ export default function Dashboard({ }: Props) {
   return (
     <>
       <Head>
-        <title>DG Pizza | Painel</title>
+        <title>Painel | DG Pizza</title>
       </Head>
       <div>
         <Header />

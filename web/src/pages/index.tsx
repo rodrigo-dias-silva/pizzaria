@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>DG Pizza | Faça o login</title>
+        <title>DG Pizza</title>
       </Head>
       <div className='min-h-screen flex flex-col justify-center items-center'>
         <Image src={logoImg} alt='Logo DG Pizza' />
