@@ -6,6 +6,7 @@ import { Button } from "@/src/components/ui/Button"
 import { Input } from "@/src/components/ui/Input"
 import { setupAPIClient } from "@/src/services/api"
 import { toast } from "react-toastify"
+import { canSSRAuth } from "@/src/utils/canSSRAuth"
 
 type Props = {}
 
@@ -34,7 +35,7 @@ export default function Category({ }: Props) {
   return (
     <>
       <Head>
-        <title>DG Pizza | Nova categoria</title>
+        <title>Nova categoria | DG Pizza</title>
       </Head>
       <div>
         <Header />
@@ -55,3 +56,9 @@ export default function Category({ }: Props) {
     </>
   )
 }
+
+export const getServerSideProps = canSSRAuth(async (ctx) => {
+  return {
+    props: {}
+  }
+})
