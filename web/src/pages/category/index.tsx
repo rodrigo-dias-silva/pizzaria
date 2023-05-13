@@ -39,7 +39,7 @@ export default function Category({ }: Props) {
       </Head>
       <div>
         <Header />
-        <main className="max-w-3xl my-16 px-8 flex justify-between flex-col">
+        <main className="max-w-3xl my-16 px-8 flex justify-between m-auto flex-col gap-4">
           <h1 className="text-white text-4xl font-semibold">Cadastrar categorias</h1>
 
           <form className="flex flex-col my-4" onSubmit={handleRegister}>

@@ -11,7 +11,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 export function Button({ loading, children, bgcolor, txtcolor, ...rest }: Props) {
   return (
     <button
-      className={`max-w-xl h-10 bg-${bgcolor}-theme flex justify-center items-center p-2 text-${txtcolor} font-semibold text-xl rounded-lg transition-all hover:brightness-125 disabled:cursor-not-allowed`}
+      className={`w-full h-10 bg-${bgcolor}-theme flex justify-center items-center p-2 text-${txtcolor} font-semibold text-xl rounded-lg transition-all hover:brightness-125 disabled:cursor-not-allowed`}
       disabled={loading}
       {...rest}
     >
