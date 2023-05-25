@@ -7,6 +7,9 @@ import Header from '@/src/components/Header'
 import { canSSRAuth } from '@/src/utils/canSSRAuth'
 import { setupAPIClient } from '@/src/services/api'
 
+import Modal from 'react-modal'
+import ModalOrder from '@/src/components/ModalOrder'
+
 type OrderProps = {
   id: string,
   table: string | number,
@@ -19,13 +22,52 @@ interface HomeProps {
   orders: OrderProps[]
 }
 
+export type OrderItemProps = {
+  id: string,
+  amount: number,
+  order_id: string,
+  product_id: string,
+  product: {
+    id: string,
+    name: string,
+    description: string,
+    price: string,
+    banner: string
+  }
+  order: {
+    id: string,
+    table: string | number,
+    status: boolean,
+    name: string | null
+  }
+}
+
 export default function Dashboard({ orders }: HomeProps) {
 
   const [orderList, setOrderList] = useState(orders || [])
 
-  function handleOpenModalView(id: string) {
-    alert('clicou' + id)
+  const [modalItem, setModalItem] = useState<OrderItemProps[]>()
+  const [modalVisible, setModalVisible] = useState(false)
+
+  function handleCloseModalView() {
+    setModalVisible(false)
   }
+
+  async function handleOpenModalView(id: string) {
+
+    const apiClient = setupAPIClient()
+
+    const res = await apiClient.get('/order/detail', {
+      params: {
+        order_id: id
+      }
+    })
+
+    setModalItem(res.data)
+    setModalVisible(true)
+  }
+
+  Modal.setAppElement('#__next')
 
   return (
     <>
@@ -56,6 +98,9 @@ export default function Dashboard({ orders }: HomeProps) {
             ))}
           </article>
         </main>
+        {modalVisible && (
+          <ModalOrder />
+        )}
       </div>
     </>
   )
