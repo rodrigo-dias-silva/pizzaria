@@ -98,7 +98,7 @@ export default function Product({ categoryList }: CategoryProps) {
       <div>
         <Header />
         <main className="max-w-3xl my-16 px-8 flex justify-between flex-col m-auto gap-4">
-          <h1 className="text-white text-4xl font-semibold">Novo produto</h1>
+          <h1 className="text-white text-3xl font-semibold">Novo produto</h1>
 
           <form className="flex flex-col my-4 w-full" onSubmit={handleRegister}>
 
