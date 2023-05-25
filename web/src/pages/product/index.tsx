@@ -1,6 +1,8 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
+
+import { toast } from 'react-toastify'
 
 import { UploadSimple } from '@phosphor-icons/react'
 
@@ -22,8 +24,13 @@ interface CategoryProps {
 
 export default function Product({ categoryList }: CategoryProps) {
 
+  const [name, setName] = useState('')
+  const [price, setPrice] = useState('')
+  const [description, setDescription] = useState('')
+
   const [avatarUrl, setAvatarUrl] = useState('')
   const [imgAvatar, setImgAvatar] = useState(null)
+
   const [categories, setCategories] = useState(categoryList || [])
   const [categorySelected, setCategorySelected] = useState(0)
 
@@ -48,6 +55,41 @@ export default function Product({ categoryList }: CategoryProps) {
 
   }
 
+  async function handleRegister(e: FormEvent) {
+    e.preventDefault()
+
+    try {
+      const data = new FormData()
+
+      if (name === '' || price === '' || description === '' || imgAvatar === null) {
+        toast.error('Preencha todos os campos!')
+        return
+      }
+
+      data.append('name', name)
+      data.append('price', price)
+      data.append('description', description)
+      data.append('category_id', categories[categorySelected].id)
+      data.append('file', imgAvatar)
+
+      const apiClient = setupAPIClient()
+
+      await apiClient.post('/product', data)
+
+      toast.success('Produto cadastrado com sucesso!')
+
+    } catch (error) {
+      console.error(error);
+      toast.error('Ops... erro ao cadastrar.')
+    }
+
+    setName('')
+    setPrice('')
+    setDescription('')
+    setImgAvatar(null)
+    setAvatarUrl('')
+  }
+
   return (
     <>
       <Head>
@@ -58,7 +100,7 @@ export default function Product({ categoryList }: CategoryProps) {
         <main className="max-w-3xl my-16 px-8 flex justify-between flex-col m-auto gap-4">
           <h1 className="text-white text-4xl font-semibold">Novo produto</h1>
 
-          <form className="flex flex-col my-4 w-full">
+          <form className="flex flex-col my-4 w-full" onSubmit={handleRegister}>
 
             <label className='group w-full h-60 bg-dark-900 mb-4 rounded-lg flex justify-center items-center border border-gray-500 cursor-pointer overflow-hidden'>
               <span className='z-10 absolute opacity-50 group-hover:scale-125 group-hover:opacity-90 transition-all duration-700'>
@@ -94,11 +136,23 @@ export default function Product({ categoryList }: CategoryProps) {
               })}
             </select>
 
-            <Input placeholder='Nome do produto' />
-            <Input placeholder='Valor' />
-            <TextArea placeholder='Descrição do produto' />
+            <Input
+              placeholder='Nome do produto'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <Input
+              placeholder='Valor'
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+            <TextArea
+              placeholder='Descrição do produto'
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
 
-            <ButtonGreen children='Cadastrar' />
+            <ButtonGreen children='Cadastrar' type='submit' />
           </form>
         </main>
       </div>
