@@ -7,15 +7,25 @@ import { UploadSimple } from '@phosphor-icons/react'
 import { canSSRAuth } from '@/src/utils/canSSRAuth'
 
 import Header from '@/src/components/Header'
-import { Button } from '@/src/components/ui/Button'
+import { ButtonGreen } from '@/src/components/ui/Button'
 import { Input, TextArea } from '@/src/components/ui/Input'
+import { setupAPIClient } from '@/src/services/api'
 
-type Props = {}
+type ItemProps = {
+  id: string,
+  name: string
+}
 
-export default function Product({ }: Props) {
+interface CategoryProps {
+  categoryList: ItemProps[]
+}
+
+export default function Product({ categoryList }: CategoryProps) {
 
   const [avatarUrl, setAvatarUrl] = useState('')
   const [imgAvatar, setImgAvatar] = useState(null)
+  const [categories, setCategories] = useState(categoryList || [])
+  const [categorySelected, setCategorySelected] = useState(0)
 
   function handleFile(e: ChangeEvent<HTMLInputElement>) {
 
@@ -30,6 +40,12 @@ export default function Product({ }: Props) {
       setImgAvatar(image)
       setAvatarUrl(URL.createObjectURL(image))
     }
+  }
+
+  function handleChangeCategory(e) {
+
+    setCategorySelected(e.target.value)
+
   }
 
   return (
@@ -64,16 +80,25 @@ export default function Product({ }: Props) {
               }
             </label>
 
-            <select className="mb-4 h-10 rounded-lg text-white bg-dark-900 px-4 border border-gray-500">
-              <option>Bebida</option>
-              <option>Pizza</option>
+            <select
+              className="mb-4 h-10 rounded-lg text-white bg-dark-900 px-4 border border-gray-500"
+              value={categorySelected}
+              onChange={handleChangeCategory}
+            >
+              {categories.map((item, index) => {
+                return (
+                  <option key={item.id} value={index}>
+                    {item.name}
+                  </option>
+                )
+              })}
             </select>
 
             <Input placeholder='Nome do produto' />
             <Input placeholder='Valor' />
             <TextArea placeholder='Descrição do produto' />
 
-            <Button bgcolor='green' txtcolor='black' children='Cadastrar' />
+            <ButtonGreen children='Cadastrar' />
           </form>
         </main>
       </div>
@@ -82,7 +107,14 @@ export default function Product({ }: Props) {
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
+  const apiClient = setupAPIClient(ctx)
+
+  const res = await apiClient.get('/categories')
+
+
   return {
-    props: {}
+    props: {
+      categoryList: res.data
+    }
   }
 })
