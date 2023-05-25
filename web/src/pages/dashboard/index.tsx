@@ -1,12 +1,32 @@
+import React, { useState } from 'react'
+import Head from 'next/head'
+
+import { ArrowClockwise } from '@phosphor-icons/react'
+
 import Header from '@/src/components/Header'
 import { canSSRAuth } from '@/src/utils/canSSRAuth'
-import { ArrowClockwise } from '@phosphor-icons/react'
-import Head from 'next/head'
-import React from 'react'
+import { setupAPIClient } from '@/src/services/api'
 
-type Props = {}
+type OrderProps = {
+  id: string,
+  table: string | number,
+  status: boolean,
+  draft: boolean,
+  name: string | null
+}
 
-export default function Dashboard({ }: Props) {
+interface HomeProps {
+  orders: OrderProps[]
+}
+
+export default function Dashboard({ orders }: HomeProps) {
+
+  const [orderList, setOrderList] = useState(orders || [])
+
+  function handleOpenModalView(id: string) {
+    alert('clicou' + id)
+  }
+
   return (
     <>
       <Head>
@@ -23,12 +43,17 @@ export default function Dashboard({ }: Props) {
           </div>
 
           <article className='flex flex-col my-4'>
-            <section className='flex bg-dark-900 items-center rounded overflow-hidden'>
-              <button className='text-xl flex gap-4 text-white h-14 items-center w-full'>
-                <div className='w-2 bg-green-theme h-full' />
-                <span>Mesa 30</span>
-              </button>
-            </section>
+            {orderList.map(item => (
+              <section key={item.id} className='flex bg-dark-900 items-center rounded overflow-hidden'>
+                <button
+                  className='text-xl flex gap-4 text-white h-14 items-center w-full'
+                  onClick={() => handleOpenModalView(item.id)}
+                >
+                  <div className='w-2 bg-green-theme h-full' />
+                  <span>Mesa {item.table}</span>
+                </button>
+              </section>
+            ))}
           </article>
         </main>
       </div>
@@ -37,7 +62,14 @@ export default function Dashboard({ }: Props) {
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
+
+  const apiClient = setupAPIClient(ctx)
+
+  const res = await apiClient.get('/orders')
+
   return {
-    props: {}
+    props: {
+      orders: res.data
+    }
   }
 })
