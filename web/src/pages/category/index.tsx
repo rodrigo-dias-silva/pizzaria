@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react"
 import Head from "next/head"
 
 import Header from "@/src/components/Header"
-import { Button } from "@/src/components/ui/Button"
+import { ButtonGreen } from "@/src/components/ui/Button"
 import { Input } from "@/src/components/ui/Input"
 import { setupAPIClient } from "@/src/services/api"
 import { toast } from "react-toastify"
@@ -49,7 +49,7 @@ export default function Category({ }: Props) {
               onChange={(e) => setName(e.target.value)}
             />
 
-            <Button children='Cadastrar' bgcolor="green" txtcolor="black" />
+            <ButtonGreen children='Cadastrar' />
           </form>
         </main>
       </div>

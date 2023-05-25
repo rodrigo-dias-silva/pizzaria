@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 import logoImg from '../../public/logo.svg'
 import { Input } from '../components/ui/Input'
-import { Button } from '../components/ui/Button'
+import { ButtonRed } from '../components/ui/Button'
 
 import { AuthContext } from '../contexts/AuthContext'
 import { toast } from 'react-toastify'
@@ -58,14 +58,12 @@ export default function Home() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button
+            <ButtonRed
               type='submit'
               loading={loading}
-              bgcolor='red'
-              txtcolor='white'
             >
               Acessar
-            </Button>
+            </ButtonRed>
           </form>
 
           <Link href='/signup' className='mt-4 text-white'>Nao possui uma conta?</Link>

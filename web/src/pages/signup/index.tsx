@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import logoImg from '../../../public/logo.svg'
 import { Input } from '../../components/ui/Input'
-import { Button } from '../../components/ui/Button'
+import { ButtonRed } from '../../components/ui/Button'
 import { AuthContext } from '@/src/contexts/AuthContext'
 import { toast } from 'react-toastify'
 
@@ -70,14 +70,12 @@ export default function SignUp() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button
+            <ButtonRed
               type='submit'
               loading={loadind}
-              bgcolor='red'
-              txtcolor='white'
             >
               Cadastrar
-            </Button>
+            </ButtonRed>
           </form>
 
           <Link href='/' className='mt-4 text-white'>Já possuo uma conta</Link>
