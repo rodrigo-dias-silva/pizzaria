@@ -5,10 +5,11 @@ import Modal from 'react-modal'
 type ModalOrderProps = {
   isOpen: boolean,
   onRequestClose: () => void,
-  order: OrderItemProps[]
+  order: OrderItemProps[],
+  handleFinishOrder: (id: string) => void
 }
 
-export default function ModalOrder({ isOpen, onRequestClose, order }: ModalOrderProps) {
+export default function ModalOrder({ isOpen, onRequestClose, order, handleFinishOrder }: ModalOrderProps) {
 
   const customStyles = {
     content: {
@@ -52,6 +53,7 @@ export default function ModalOrder({ isOpen, onRequestClose, order }: ModalOrder
 
         <button
           className='mt-6 bg-dark-900 py-2 px-4 rounded text-green-theme font-semibold'
+          onClick={() => handleFinishOrder(order[0].order_id)}
         >
           Concluir pedido
         </button>
