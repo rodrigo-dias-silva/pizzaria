@@ -110,7 +110,7 @@ export default function Dashboard({ orders }: HomeProps) {
           <article className='flex flex-col my-4'>
 
             {orderList.length === 0 && (
-              <span className='text-zinc-400 text-xl'>Voçe não tem nenhum pedido em aberto...</span>
+              <span className='text-zinc-400 text-xl'>Você não tem nenhum pedido em aberto...</span>
             )}
 
             {orderList.map(item => (
