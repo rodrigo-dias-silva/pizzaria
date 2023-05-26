@@ -67,6 +67,26 @@ export default function Dashboard({ orders }: HomeProps) {
     setModalVisible(true)
   }
 
+  async function handleFinishItem(id: string) {
+    const apiClient = setupAPIClient()
+    await apiClient.put('/order/finish', {
+      order_id: id
+    })
+
+    const res = await apiClient.get('/orders')
+
+    setOrderList(res.data)
+
+    setModalVisible(false)
+  }
+
+  async function handleRefreshOrders() {
+    const apiClient = setupAPIClient()
+    const res = await apiClient.get('/orders')
+
+    setOrderList(res.data)
+  }
+
   Modal.setAppElement('#__next')
 
   return (
@@ -79,14 +99,22 @@ export default function Dashboard({ orders }: HomeProps) {
         <main className="max-w-3xl my-16 px-8 flex justify-between m-auto flex-col gap-4">
           <div className='flex gap-4'>
             <h1 className="text-white text-3xl font-semibold">Últimos pedidos</h1>
-            <button>
+            <button
+              className=''
+              onClick={handleRefreshOrders}
+            >
               <ArrowClockwise size={24} color='#3fffa3' />
             </button>
           </div>
 
           <article className='flex flex-col my-4'>
+
+            {orderList.length === 0 && (
+              <span className='text-zinc-400 text-xl'>Voçe não tem nenhum pedido em aberto...</span>
+            )}
+
             {orderList.map(item => (
-              <section key={item.id} className='flex bg-dark-900 items-center rounded overflow-hidden'>
+              <section key={item.id} className='flex bg-dark-900 items-center rounded overflow-hidden mb-4'>
                 <button
                   className='text-xl flex gap-4 text-white h-14 items-center w-full'
                   onClick={() => handleOpenModalView(item.id)}
@@ -103,6 +131,7 @@ export default function Dashboard({ orders }: HomeProps) {
             isOpen={modalVisible}
             onRequestClose={handleCloseModalView}
             order={modalItem}
+            handleFinishOrder={handleFinishItem}
           />
         )}
       </div>
