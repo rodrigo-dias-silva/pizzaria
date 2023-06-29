@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { View, Image } from 'react-native'
+
+import { AuthContext } from '../../contexts/AuthContext'
 
 import InputText from '../../components/InputText'
 import { ButtonGreen } from '../../components/Button'
 
 
 export default function SignIn() {
+
+  const { user } = useContext(AuthContext)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
