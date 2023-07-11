@@ -33,14 +33,12 @@ export default function SignIn() {
       <View className='w-full px-5 items-center justify-center space-y-3'>
         <InputText
           placeholder='Digite seu e-mail'
-          bgColor='dark-900'
           value={email}
           onChangeText={setEmail}
         />
 
         <InputText
           placeholder='Digite sua senha'
-          bgColor='dark-900'
           secureTextEntry={true}
           value={password}
           onChangeText={setPassword}
