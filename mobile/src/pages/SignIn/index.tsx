@@ -3,7 +3,7 @@ import { View, Image } from 'react-native'
 
 import { AuthContext } from '../../contexts/AuthContext'
 
-import InputText from '../../components/InputText'
+import { InputText } from '../../components/InputText'
 import { ButtonGreen } from '../../components/Button'
 
 
