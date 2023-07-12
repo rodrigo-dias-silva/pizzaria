@@ -13,14 +13,14 @@ function ButtonGreen({ content, ...rest }: Props) {
   return (
     <TouchableOpacity
       {...rest}
-      className='bg-greenTheme w-full h-10 rounded items-center justify-center'
+      className='bg-greenTheme w-full h-12 rounded items-center justify-center'
     >
       {
         loadingAuth ?
           (
             <ActivityIndicator size={24} color='#fff' />
           ) : (
-            <Text className='text-lg font-bold text-dark-900'>{content}</Text>
+            <Text className='font-bold text-dark-900 text-xl'>{content}</Text>
           )
       }
     </TouchableOpacity>
@@ -31,9 +31,9 @@ function ButtonRed({ content, ...rest }: Props) {
   return (
     <TouchableOpacity
       {...rest}
-      className='bg-redTheme w-full h-10 rounded items-center justify-center'
+      className='bg-redTheme w-full h-12 rounded items-center justify-center'
     >
-      <Text className='text-lg font-bold text-dark-900'>{content}</Text>
+      <Text className='text-xl font-bold text-dark-900'>{content}</Text>
     </TouchableOpacity>
   )
 }
