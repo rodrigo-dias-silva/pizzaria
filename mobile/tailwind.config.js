@@ -8,6 +8,7 @@ module.exports = {
         'dark-700': '#1d1d2e',
         'greenTheme': '#3fffa3',
         'redTheme': '#ff3f4b',
+        'blueTheme': '#3FD1FF'
       }
     },
   },
