@@ -38,4 +38,15 @@ function ButtonRed({ content, ...rest }: Props) {
   )
 }
 
-export { ButtonGreen, ButtonRed }
+function ButtonBlue({ content, ...rest }: Props) {
+  return (
+    <TouchableOpacity
+      {...rest}
+      className='bg-blueTheme w-full h-12 rounded items-center justify-center'
+    >
+      <Text className='text-3xl text-white'>{content}</Text>
+    </TouchableOpacity>
+  )
+}
+
+export { ButtonGreen, ButtonRed, ButtonBlue }
