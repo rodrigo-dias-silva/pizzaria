@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity, Modal } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 
 import { useRoute, RouteProp, useNavigation } from '@react-navigation/native'
@@ -7,6 +7,7 @@ import { InputTextCenter } from '../../components/InputText'
 import { ButtonBlue, ButtonGreen } from '../../components/Button'
 
 import { api } from '../../services/api'
+import { ModalPicker } from '../../components/ModalPicker'
 
 type RouteDetailParms = {
   Order: {
@@ -15,7 +16,7 @@ type RouteDetailParms = {
   }
 }
 
-type CategoryProps = {
+export type CategoryProps = {
   id: string,
   name: string
 }
@@ -29,6 +30,7 @@ export default function Order() {
 
   const [category, setCategory] = useState<CategoryProps[] | []>([])
   const [categorySelected, setCategorySelected] = useState<CategoryProps>()
+  const [modalCategoryVisible, setModalCategoryVisible] = useState(false)
 
   const [amount, setAmount] = useState('1')
 
@@ -60,6 +62,10 @@ export default function Order() {
     }
   }
 
+  function handleChangeCategory(item: CategoryProps) {
+    setCategorySelected(item)
+  }
+
   return (
     <SafeAreaView className='flex-1 py-4 bg-dark-700 px-5 space-y-6'>
       <View className='flex-row items-center mt-8'>
@@ -72,7 +78,10 @@ export default function Order() {
       </View>
 
       {category.length !== 0 && (
-        <TouchableOpacity className='bg-dark-900 rounded w-full h-12 justify-center px-2'>
+        <TouchableOpacity
+          className='bg-dark-900 rounded w-full h-12 justify-center px-2'
+          onPress={() => setModalCategoryVisible(true)}
+        >
           <Text className='text-white'>{categorySelected?.name}</Text>
         </TouchableOpacity>
       )}
@@ -100,6 +109,19 @@ export default function Order() {
           <ButtonGreen content='Avançar' />
         </View>
       </View>
+
+      <Modal
+        transparent={true}
+        visible={modalCategoryVisible}
+        animationType='fade'
+      >
+        <ModalPicker
+          handleCloseModal={() => setModalCategoryVisible(false)}
+          options={category}
+          selectedItem={handleChangeCategory}
+        />
+
+      </Modal>
 
     </SafeAreaView>
   )
