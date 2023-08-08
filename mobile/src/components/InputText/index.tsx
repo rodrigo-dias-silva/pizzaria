@@ -2,7 +2,7 @@ import React from 'react'
 import { TextInput, TextInputProps } from 'react-native'
 
 interface InputTextProps extends TextInputProps {
-  placeholder: string,
+  placeholder?: string,
 }
 
 function InputText({ placeholder, ...rest }: InputTextProps) {
