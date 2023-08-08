@@ -8,6 +8,8 @@ import { InputTextCenter } from '../../components/InputText'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackParmsList } from '../../routes/app.routes'
 
+import { api } from '../../services/api'
+
 export default function Dashboard() {
 
   const navigation = useNavigation<NativeStackNavigationProp<StackParmsList>>()
@@ -19,7 +21,13 @@ export default function Dashboard() {
       return
     }
 
-    navigation.navigate('Order', { number: table, order_id: '12312333' })
+    const response = await api.post('/order', {
+      table: Number(table)
+    })
+
+    navigation.navigate('Order', { number: table, order_id: response.data.id })
+
+    setTable('')
   }
 
   return (
